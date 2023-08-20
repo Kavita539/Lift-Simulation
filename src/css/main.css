@@ -157,7 +157,7 @@ h3 {
   overflow: hidden;
 }
 
-#floor-0{
+#floor-0 {
   display: flex;
   position: absolute;
   left: 10rem;
@@ -186,4 +186,36 @@ h3 {
 
 .right-door--animation {
   animation: moveRightDoor 2.5s ease-in-out;
+}
+
+.moveLiftUp--animation {
+  transition: all 5s;
+}
+
+@keyframes moveLeftDoor {
+  0% {
+    transform: translateX(0)
+  }
+
+  50% {
+    transform: translateX(-5.5rem)
+  }
+
+  100% {
+    transform: translateX(0)
+  }
+}
+
+@keyframes moveRightDoor {
+  0% {
+    transform: translateX(0)
+  }
+
+  50% {
+    transform: translateX(5.5rem)
+  }
+
+  100% {
+    transform: translateX(0)
+  }
 }

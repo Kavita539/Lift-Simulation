@@ -5,7 +5,6 @@ const inputs = document.querySelectorAll(".inputs");
 const generateBtn = document.querySelector(".generate-btn");
 const error = document.querySelector(".error");
 const sectionContainer = document.querySelector(".lift-game-section");
-const lifts = document.createElement("div");
 
 inputs.forEach((input) => {
     input.addEventListener("keyup", () => {
@@ -101,4 +100,66 @@ generateBtn.addEventListener("click", generateLiftsAndFloors);
 const hidingLastButtonAndFirstButton = (totalFloor) => {
     document.querySelector(".bttns-down-0").remove();
     document.querySelector(`.bttns-up-${totalFloor - 1}`).remove();
+};
+
+const handleLifts = (position) => {
+    const liftsTarget = Array.from(document.querySelectorAll(".lift"));
+    if (liftsTarget.find((lift) => lift.dataset.status === "free")) {
+        moveLiftsInOrder(position);
+    } else {
+        storeLiftRequest(position);
+    }
+};
+
+let liftsPush = [];
+const storeLiftRequest = (pos) => {
+    liftsPush.push(pos);
+};
+
+const moveLiftsInOrder = (pos) => {
+    const liftsTarget = Array.from(document.querySelectorAll(".lift")); 
+    const getLifts = liftsTarget.find((lift) => lift.dataset.status === "free");
+    if (Number(getLifts.dataset.current) === pos) {
+        doorsOpening(getLifts, pos);
+    } else {
+        liftMovement(getLifts, pos);
+    }
+};
+
+const liftMovement = (lift, pos) => {
+    lift.setAttribute("data-status", "busy");
+
+    const distance = Math.abs(Number(lift.dataset.current) - pos);
+
+    lift.style.transform = `translateY(-${12.5 * pos}rem)`;
+    lift.style.transition = `all ${(distance*2)}s linear`
+    doorsOpening(lift, pos);
+    console.log(liftsPush, 'mk');
+    setTimeout(() => {
+        if (liftsPush.length > 0) {
+            console.log("mkk")
+            liftMovement(lift, liftsPush[0])
+            liftsPush.shift()
+        }
+    }, distance * 2000 + 6000);
+
+};
+
+
+const doorsOpening = (lift, pos) => {
+    lift.setAttribute("data-status", "busy");
+    const distance = Math.abs(Number(lift.dataset.current) - pos);
+
+    setTimeout(() => {
+        console.log("door opens up", pos)
+        lift.childNodes[0].classList.add("left-door--animation");
+        lift.children[1].classList.add("right-door--animation");
+    }, distance * 2000 + 2000);
+
+    setTimeout(() => {
+        lift.childNodes[0].classList.remove("left-door--animation");
+        lift.children[1].classList.remove("right-door--animation");
+        lift.setAttribute("data-status", "free");
+        lift.setAttribute("data-current", pos);
+    }, distance * 2000 + 4800);
 };
