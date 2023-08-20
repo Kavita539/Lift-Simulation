@@ -21,12 +21,12 @@ inputs.forEach((input) => {
 
 
 const generateLiftsAndFloors = (e) => {
-    console.log(":::hello");
     e.preventDefault();
     if (inputFloor.value !== "" && inputLift.value !== "") {
         liftGenerator.style.display = "none";
         generateFloors();
         generateLifts();
+        hidingLastButtonAndFirstButton(inputFloor.value);
     } else {
         alert("Please enter the values");
     }
@@ -46,7 +46,7 @@ const generateLifts = () => {
         liftRightDoor.classList.add("right-door");
         liftsBoxEl.appendChild(liftLeftDoor);
         liftsBoxEl.appendChild(liftRightDoor);
-        
+
         const lifts = document.querySelector("#floor-0");
         lifts.append(liftsBoxEl);
     }
@@ -57,11 +57,11 @@ const generateFloors = () => {
     for (let i = totalFloor - 1; i >= 0; i--) {
         const divEl = document.createElement("div");
         divEl.classList.add("floor");
-        
+
         const divFlexSides = document.createElement("div");
         divFlexSides.classList.add("flex-sides");
         divEl.appendChild(divFlexSides);
-        
+
         const divElBtns = document.createElement("div");
         divElBtns.classList.add("btns");
         const btnUp = document.createElement("button");
@@ -70,23 +70,23 @@ const generateFloors = () => {
         btnUp.addEventListener("click", () => {
             handleLifts(i);
         });
-        
+
         const btnDown = document.createElement("button");
         btnDown.setAttribute("class", `btn btn-down bttns-down-${i}`);
         btnDown.innerHTML = `<i class="fa-sharp fa-solid fa-caret-down"></i>`;
         btnDown.addEventListener("click", () => {
             handleLifts(i);
         });
-        
+
         divElBtns.appendChild(btnUp);
         divElBtns.appendChild(btnDown);
         divFlexSides.appendChild(divElBtns);
-        
+
         const floorNumber = document.createElement("h3");
         floorNumber.classList.add("floor-number");
         floorNumber.innerText = `Floor ${i}`;
         divFlexSides.appendChild(floorNumber);
-        
+
         //lift-container
         const lifts = document.createElement("div");
         lifts.setAttribute("class", "lifts-section");
@@ -97,3 +97,8 @@ const generateFloors = () => {
 };
 
 generateBtn.addEventListener("click", generateLiftsAndFloors);
+
+const hidingLastButtonAndFirstButton = (totalFloor) => {
+    document.querySelector(".bttns-down-0").remove();
+    document.querySelector(`.bttns-up-${totalFloor - 1}`).remove();
+};
