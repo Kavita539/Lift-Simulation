@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lift simulation</title>
+    <link rel="stylesheet" href="/src/css/main.css" />
 </head>
+
 <body>
     <div class="lift-generator">
         <h1>Lift simulation</h1>
         <form class="lift-generator-inputs">
             <div class="floors-input">
-                <div>Enter the number of floors</div>
-                <input type="number" placeholder="Enter the number of floors between 1 to 15" min="1" max="15" required/>
+                <label>Enter the number of floors</label>
+                <input type="number" placeholder="Enter the number of floors between 1 to 15" min="1" max="15"
+                    required />
             </div>
             <div class="lifts-input">
-                <div>Enter the number of lifts</div>
-                <input type="number" placeholder="Enter the number of floors between 1 to 20" min="1" max="20" required/>
+                <label>Enter the number of lifts</label>
+                <input type="number" placeholder="Enter the number of floors between 1 to 20" min="1" max="20"
+                    required />
             </div>
+            <button type="submit" class="generate-btn">Generate</button>
+            <div class="error"></div>
         </form>
     </div>
 </body>
+
 </html>
