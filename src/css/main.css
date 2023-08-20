@@ -34,7 +34,6 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(90deg, var(--card-border-color), var(--btn-color));
 }
 
 .lift-generator {
@@ -217,5 +216,28 @@ h3 {
 
   100% {
     transform: translateX(0)
+  }
+}
+
+@media (max-width: 650px) {
+  html {
+    font-size: 50%;
+  }
+
+  .lift {
+    width: 10rem;
+    height: 10rem;
+    margin: 0.5rem;
+  }
+
+  .floor {
+    height: 104px;
+  }
+
+  #floor-0 {
+    display: flex;
+    position: absolute;
+    left: 7rem;
+    bottom: 0rem;
   }
 }
