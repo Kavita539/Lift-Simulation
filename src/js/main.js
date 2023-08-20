@@ -134,10 +134,8 @@ const liftMovement = (lift, pos) => {
     lift.style.transform = `translateY(-${12.5 * pos}rem)`;
     lift.style.transition = `all ${(distance*2)}s linear`
     doorsOpening(lift, pos);
-    console.log(liftsPush, 'mk');
     setTimeout(() => {
         if (liftsPush.length > 0) {
-            console.log("mkk")
             liftMovement(lift, liftsPush[0])
             liftsPush.shift()
         }
@@ -151,7 +149,6 @@ const doorsOpening = (lift, pos) => {
     const distance = Math.abs(Number(lift.dataset.current) - pos);
 
     setTimeout(() => {
-        console.log("door opens up", pos)
         lift.childNodes[0].classList.add("left-door--animation");
         lift.children[1].classList.add("right-door--animation");
     }, distance * 2000 + 2000);
